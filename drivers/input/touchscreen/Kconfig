@@ -1290,5 +1290,6 @@ config TOUCHSCREEN_HIMAX_CHIPSET
 	  If unsure, say N.
 
 source "drivers/input/touchscreen/hxchipset/Kconfig"
+source "drivers/input/touchscreen/cyttsp4/Kconfig"
 
 endif
