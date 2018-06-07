@@ -8127,7 +8127,7 @@ static int bma2x2_parse_dt(struct device *dev,
 		dev_err(dev, "Unable to read sensor place parameter\n");
 		return rc;
 	}
-	if (temp_val > 7) {
+	if (temp_val > (MAX_AXIS_REMAP_TAB_SZ - 1)) {
 		dev_err(dev, "Invalid place parameter, use default value 0\n");
 		pdata->place = 0;
 	} else {
