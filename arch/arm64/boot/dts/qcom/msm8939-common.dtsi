@@ -564,16 +564,14 @@
 
 	tsens: tsens@4a8000 {
 		compatible = "qcom,msm8939-tsens";
-		reg = <0x4a8000 0x2000>,
-		      <0x5c000  0x1000>;
-		reg-names = "tsens_physical", "tsens_eeprom_physical";
+		reg = <0x4a8000 0x1000>,
+			<0x4a9000 0x1000>,
+			<0xa4000  0x1000>;
+		reg-names = "tsens_srot_physical",
+			"tsens_tm_physical", "tsens_eeprom_physical";
 		interrupts = <0 184 0>;
 		interrupt-names = "tsens-upper-lower";
-		qcom,sensors = <9>;
-		qcom,slope = <2911 2789 2906 2763 2922 2867 2833 2838 2840>;
-		qcom,sensor-id = <0 1 2 3 5 6 7 8 9>;
-		qcom,client-id = <0 1 2 3 5 6 7 8 9>;
-		qcom,valid-status-check;
+		#thermal-sensor-cells = <1>;
 	};
 
 	qcom,sensor-information {
