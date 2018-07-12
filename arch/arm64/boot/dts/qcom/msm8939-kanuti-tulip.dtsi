@@ -10,6 +10,8 @@
  * GNU General Public License for more details.
  */
 
+#include <dt-bindings/pinctrl/qcom,pmic-gpio.h>
+
 / {
 	reserved-memory {
 		pstore_reserve_mem: pstore_reserve_mem_region@a0000000 {
@@ -432,27 +434,24 @@
 };
 
 &pm8916_mpps {
-	mpp@a300 { /* MPP4: NC */
+	wled_pwm_mpp { /* MPP4: NC */
 		status = "disabled";
 	};
 };
 
 &pm8916_gpios {
-	gpio@c100 { /* GPIO 2: NC */
+	nfc_clk { /* GPIO 2: NC */
 		status = "disabled";
 	};
 
-	gpio@c200 { /* GPIO 3: Camera */
-		qcom,mode = <1>;		/* Digital output */
-		qcom,output-type = <0>;		/* CMOS logic */
-		qcom,invert = <0>;		/* Output low by default */
-		qcom,vin-sel = <3>;		/* VIN 3 = 1.8v */
-		qcom,out-strength = <2>;	/* Medium */
-		qcom,master-en = <1>;		/* Enable GPIO */
+	wcn_ldo_en { /* GPIO 3: Camera */
+		function = "digital";	/* Digital output */
+		drive-push-pull;	// CHECK ME!!!
+		power-source = <PM8916_GPIO_L5>;	/* 1.8v */
+		qcom,drive-strength = <PMIC_GPIO_STRENGTH_MED>;	/* Medium */
 		status = "ok";
 	};
 };
-
 
 /* Pinctrl */
 &msm_gpio {
