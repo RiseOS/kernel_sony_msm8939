@@ -10,6 +10,7 @@
  * GNU General Public License for more details.
  */
 
+#if 0
 #include <dt-bindings/msm/pm.h>
 
 &soc {
@@ -604,3 +605,4 @@
 	};
 */
 };
+#endif
