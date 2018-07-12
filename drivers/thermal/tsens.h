@@ -24,6 +24,7 @@
 #define DEBUG_SIZE				10
 #define TSENS_MAX_SENSORS			16
 #define TSENS_NUM_SENSORS_8937			11
+#define TSENS_NUM_SENSORS_8939			9
 #define TSENS_NUM_SENSORS_8909			5
 #define TSENS_CONTROLLER_ID(n)			(n)
 #define TSENS_CTRL_ADDR(n)			(n)
@@ -163,10 +164,11 @@ struct tsens_device {
 };
 
 extern const struct tsens_data data_tsens2xxx, data_tsens23xx, data_tsens24xx;
-extern const struct tsens_data data_tsens14xx, data_tsens1xxx_8909;
+extern const struct tsens_data data_tsens14xx, data_tsens1xxx_8909, data_tsens1xxx_8939;
 extern struct list_head tsens_device_list;
 
 extern int calibrate_8937(struct tsens_device *tmdev);
+extern int calibrate_8939(struct tsens_device *tmdev);
 extern int calibrate_8909(struct tsens_device *tmdev);
 
 #endif /* __QCOM_TSENS_H__ */

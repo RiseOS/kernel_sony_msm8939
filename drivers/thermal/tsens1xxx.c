@@ -557,3 +557,20 @@ const struct tsens_data data_tsens1xxx_8909 = {
 	.ver_major = 1,
 	.ver_minor = 1,
 };
+
+static const struct tsens_ops ops_tsens1xxx_8939 = {
+	.hw_init		= tsens1xxx_hw_init,
+	.get_temp		= tsens1xxx_get_temp,
+	.set_trips		= tsens1xxx_set_trip_temp,
+	.interrupts_reg		= tsens1xxx_register_interrupts,
+	.sensor_en		= tsens1xxx_hw_sensor_en,
+	.calibrate		= calibrate_8939,
+	.dbg			= tsens2xxx_dbg,
+};
+
+const struct tsens_data data_tsens1xxx_8939 = {
+	.num_sensors = TSENS_NUM_SENSORS_8939,
+	.ops = &ops_tsens1xxx_8939,
+	.ver_major = 1,
+	.ver_minor = 1,
+};
