@@ -604,6 +604,8 @@
 		qcom,wcnss-adc_tm = <&pm8916_adc_tm>;
 	};
 
+	thermal_zones: thermal-zones {};
+
 	tsens: tsens@4a8000 {
 		compatible = "qcom,msm8939-tsens";
 		reg = <0x4a8000 0x1000>,
@@ -614,57 +616,6 @@
 		interrupts = <0 184 0>;
 		interrupt-names = "tsens-upper-lower";
 		#thermal-sensor-cells = <1>;
-	};
-
-	qcom,msm-thermal {
-		compatible = "qcom,msm-thermal";
-		qcom,sensor-id = <5>;
-		qcom,poll-ms = <250>;
-		qcom,limit-temp = <60>;
-		qcom,temp-hysteresis = <10>;
-		qcom,freq-step = <2>;
-		qcom,freq-control-list = <&CPU0 &CPU1 &CPU2 &CPU3
-					&CPU4 &CPU5 &CPU6 &CPU7>;
-		qcom,core-limit-temp = <80>;
-		qcom,core-temp-hysteresis = <10>;
-		qcom,core-control-list = <&CPU0 &CPU1 &CPU2 &CPU3
-					&CPU4 &CPU5 &CPU6 &CPU7>;
-		qcom,hotplug-temp = <105>;
-		qcom,hotplug-temp-hysteresis = <15>;
-		qcom,cpu-sensors = "tsens_tz_sensor5", "tsens_tz_sensor6",
-				"tsens_tz_sensor7", "tsens_tz_sensor8",
-				"tsens_tz_sensor9", "tsens_tz_sensor9",
-				"tsens_tz_sensor9", "tsens_tz_sensor9";
-		qcom,freq-mitigation-temp = <105>;
-		qcom,freq-mitigation-temp-hysteresis = <15>;
-		qcom,freq-mitigation-value = <400000>;
-		qcom,freq-mitigation-control-mask = <0x01>;
-		qcom,freq-mitigation-control-list = <&CPU0>;
-		qcom,therm-reset-temp = <115>;
-		qcom,online-hotplug-core;
-		qcom,synchronous-cluster-id = <0 1>;
-		qcom,synchronous-cluster-map = <1 4 &CPU0 &CPU1 &CPU2 &CPU3>,
-						<0 4 &CPU4 &CPU5 &CPU6 &CPU7>;
-		qcom,vdd-restriction-temp = <5>;
-		qcom,vdd-restriction-temp-hysteresis = <10>;
-		vdd-dig-supply = <&pm8916_s2_floor_corner>;
-
-		qcom,vdd-dig-rstr{
-			qcom,vdd-rstr-reg = "vdd-dig";
-			qcom,levels = <5 7 7>; /* Nominal, Super Turbo, Super Turbo */
-			qcom,min-level = <1>; /* No Request */
-		};
-
-		qcom,vdd-apps-rstr{
-			qcom,vdd-rstr-reg = "vdd-apps";
-			qcom,levels = <998400>;
-			qcom,freq-req;
-		};
-	};
-
-	qcom,bcl {
-		compatible = "qcom,bcl";
-		qcom,bcl-no-bms;
 	};
 
 	qcom,memshare {
@@ -1857,5 +1808,3 @@
 		qcom,btm-channel-number = <0x68>;
 	};
 };
-
-#include "msm8939-gpu.dtsi"
