@@ -120,15 +120,6 @@ int virt_therm_probe(struct platform_device *pdev)
 			continue;
 		}
 
-		rc = of_property_read_string_array(child, "thermal-sensors",
-						vsens->sensor_names, nelems);
-		if (rc != nelems) {
-			dev_err(&pdev->dev,
-				"Cannot read thermal-sensors for %s.\n",
-				vsens->virt_zone_name);
-			rc = -EINVAL;
-			continue;
-		}
 		vsens->num_sensors = nelems;
 
 		rc = of_property_read_u32(child, "aggregation-logic",

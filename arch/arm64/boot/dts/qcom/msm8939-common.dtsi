@@ -131,7 +131,6 @@
 #include "msm8939-bus.dtsi"
 #include "msm8939-mdss.dtsi"
 #include "msm8939-vidc.dtsi"
-#include "msm8939-iommu-domains.dtsi"
 #include "msm8939-camera.dtsi"
 #include "msm8939-mdss-pll.dtsi"
 
@@ -1808,3 +1807,4 @@
 		qcom,btm-channel-number = <0x68>;
 	};
 };
+#include "msm8939-thermal.dtsi"
