@@ -571,6 +571,8 @@ static const struct tsens_ops ops_tsens1xxx_8939 = {
 const struct tsens_data data_tsens1xxx_8939 = {
 	.num_sensors = TSENS_NUM_SENSORS_8939,
 	.ops = &ops_tsens1xxx_8939,
+	.valid_status_check = true,
+	.mtc = true,
 	.ver_major = 1,
 	.ver_minor = 1,
 };
