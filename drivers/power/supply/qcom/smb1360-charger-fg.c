@@ -5203,7 +5203,9 @@ unregister_batt_psy:
 fail_hw_init:
 	regulator_unregister(chip->otg_vreg.rdev);
 destroy_mutex:
+#ifndef CONFIG_ARCH_SONY_KANUTI
 	power_supply_unregister(chip->usb_psy);
+#endif
 	wakeup_source_trash(&chip->smb1360_ws.source);
 	mutex_destroy(&chip->read_write_lock);
 	mutex_destroy(&chip->parallel_chg_lock);
