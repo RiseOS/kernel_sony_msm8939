@@ -5090,11 +5090,11 @@ static ssize_t bma2x2_selftest_store(struct device *dev,
 
 	if (bma2x2->sensor_type == BMA280_TYPE) {
 #ifdef CONFIG_SENSORS_BMI058
-			if (abs(diff) < 409)
-				result |= 4;
+		if (abs(diff) < 409)
+			result |= 4;
 #else
-			if (abs(diff) < 819)
-				result |= 4;
+		if (abs(diff) < 819)
+			result |= 4;
 #endif
 	}
 	if (bma2x2->sensor_type == BMA255_TYPE) {
