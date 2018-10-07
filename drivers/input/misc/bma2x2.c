@@ -2149,7 +2149,7 @@ static int bma2x2_set_int2_pad_sel(struct i2c_client *client, unsigned char
 #endif /* BMA2X2_ENABLE_INT2 */
 
 static int bma2x2_set_Int_Enable(struct i2c_client *client, unsigned char
-		InterruptType , unsigned char value)
+		InterruptType, unsigned char value)
 {
 	int comres = 0;
 	unsigned char data1, data2;
