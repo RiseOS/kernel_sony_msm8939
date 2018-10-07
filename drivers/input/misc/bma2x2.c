@@ -1832,7 +1832,7 @@ static int bma_i2c_burst_read(struct i2c_client *client, u8 reg_addr,
 		I2C_RETRY_DELAY();
 	}
 
-	if (BMA_MAX_RETRY_I2C_XFER <= retry) {
+	if (retry >= BMA_MAX_RETRY_I2C_XFER) {
 		dev_err(&client->dev, "I2C xfer error");
 		return -EIO;
 	}
@@ -2154,7 +2154,7 @@ static int bma2x2_set_Int_Enable(struct i2c_client *client, unsigned char
 	int comres = 0;
 	unsigned char data1, data2;
 
-	if ((11 < InterruptType) && (InterruptType < 16)) {
+	if ((InterruptType > 11) && (InterruptType < 16)) {
 		switch (InterruptType) {
 		case 12:
 			/* slow/no motion X Interrupt  */
@@ -3072,17 +3072,17 @@ static int bma2x2_set_mode(struct i2c_client *client, unsigned char mode)
 	struct bma2x2_data *bma2x2 = i2c_get_clientdata(client);
 
 	mutex_lock(&bma2x2->mode_mutex);
-	if (BMA2X2_MODE_SUSPEND == mode) {
+	if (mode == BMA2X2_MODE_SUSPEND) {
 		if (bma2x2->ref_count > 0) {
 			bma2x2->ref_count--;
-			if (0 < bma2x2->ref_count) {
+			if (bma2x2->ref_count > 0) {
 				mutex_unlock(&bma2x2->mode_mutex);
 				return 0;
 			}
 		}
 	} else {
 		bma2x2->ref_count++;
-		if (1 < bma2x2->ref_count) {
+		if (bma2x2->ref_count > 1) {
 			mutex_unlock(&bma2x2->mode_mutex);
 			return 0;
 		}
@@ -6591,9 +6591,9 @@ static ssize_t bma2x2_fifo_data_sel_show(struct device *dev,
 
 #ifdef CONFIG_SENSORS_BMI058
 /*Update BMI058 fifo_data_sel to the BMA2x2 common definition*/
-	if (BMI058_FIFO_DAT_SEL_X == data)
+	if (data == BMI058_FIFO_DAT_SEL_X)
 		data = BMA2X2_FIFO_DAT_SEL_X;
-	else if (BMI058_FIFO_DAT_SEL_Y == data)
+	else if (data == BMI058_FIFO_DAT_SEL_Y)
 		data = BMA2X2_FIFO_DAT_SEL_Y;
 #endif
 
@@ -6604,9 +6604,9 @@ static ssize_t bma2x2_fifo_data_sel_show(struct device *dev,
 		/* BMA2X2_FIFO_DAT_SEL_X: 1, Y:2, Z:3;
 		* but bst_axis_remap_tab_dft[i].src_x:0, y:1, z:2
 		* so we need to +1*/
-		if (BMA2X2_FIFO_DAT_SEL_X == data)
+		if (data == BMA2X2_FIFO_DAT_SEL_X)
 			data = bst_axis_remap_tab_dft[place].src_x + 1;
-		else if (BMA2X2_FIFO_DAT_SEL_Y == data)
+		else if (data == BMA2X2_FIFO_DAT_SEL_Y)
 			data = bst_axis_remap_tab_dft[place].src_y + 1;
 	}
 
@@ -6690,16 +6690,16 @@ static ssize_t bma2x2_fifo_data_sel_store(struct device *dev,
 		/* BMA2X2_FIFO_DAT_SEL_X: 1, Y:2, Z:3;
 		  * but bst_axis_remap_tab_dft[i].src_x:0, y:1, z:2
 		  * so we need to +1*/
-		if (BMA2X2_FIFO_DAT_SEL_X == data)
+		if (data == BMA2X2_FIFO_DAT_SEL_X)
 			data =  bst_axis_remap_tab_dft[place].src_x + 1;
-		else if (BMA2X2_FIFO_DAT_SEL_Y == data)
+		else if (data == BMA2X2_FIFO_DAT_SEL_Y)
 			data =  bst_axis_remap_tab_dft[place].src_y + 1;
 	}
 #ifdef CONFIG_SENSORS_BMI058
 	/*Update BMI058 fifo_data_sel to the BMA2x2 common definition*/
-	if (BMA2X2_FIFO_DAT_SEL_X == data)
+	if (data == BMA2X2_FIFO_DAT_SEL_X)
 		data = BMI058_FIFO_DAT_SEL_X;
-	else if (BMA2X2_FIFO_DAT_SEL_Y == data)
+	else if (data == BMA2X2_FIFO_DAT_SEL_Y)
 		data = BMI058_FIFO_DAT_SEL_Y;
 
 #endif
