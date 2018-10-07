@@ -6572,7 +6572,8 @@ static ssize_t bma2x2_fifo_trig_src_store(struct device *dev,
 
 
 /*!
- * @brief show fifo_data_sel axis definition(Android definition, not sensor HW reg).
+ * @brief show fifo_data_sel axis definition
+ * (Android definition, not sensor HW reg).
  * 0--> x, y, z axis fifo data for every frame
  * 1--> only x axis fifo data for every frame
  * 2--> only y axis fifo data for every frame
@@ -6660,7 +6661,8 @@ static ssize_t bma2x2_temperature_show(struct device *dev,
 }
 
 /*!
- * @brief store fifo_data_sel axis definition(Android definition, not sensor HW reg).
+ * @brief store fifo_data_sel axis definition
+ * (Android definition, not sensor HW reg).
  * 0--> x, y, z axis fifo data for every frame
  * 1--> only x axis fifo data for every frame
  * 2--> only y axis fifo data for every frame
